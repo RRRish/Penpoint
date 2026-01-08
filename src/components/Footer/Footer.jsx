@@ -5,7 +5,7 @@ import Logo from '../Logo';
 
 function Footer() {
   return (
-    <footer className="bg-white text-gray-500 py-8 md:py-12 w-full">
+    <footer className="bg-gray-500 text-gray-500 py-8 md:py-12 w-full">
       <div className="container mx-auto px-4 md:px-">
         <div className="flex flex-col md:flex-row items-center justify-between border-b border-gray-700 pb-6 mb-6">
           <Link to={"/"} className="flex items-center gap-2" prefetch={false}>

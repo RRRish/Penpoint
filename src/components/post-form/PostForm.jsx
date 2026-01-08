@@ -6,15 +6,22 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function PostForm({ post }) {
-  const { register, handleSubmit, watch, setValue, control, getValues } =
-    useForm({
-      defaultValues: {
-        title: post?.title || "",
-        slug: post?.$id || "",
-        content: post?.content || "",
-        status: post?.status || "active",
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    control,
+    getValues,
+    formState: { errors }
+  } = useForm({
+    defaultValues: {
+      title: post?.title || "",
+      slug: post?.$id || "",
+      content: post?.content || "",
+      status: post?.status || "active",
+    },
+  });
 
   const navigate = useNavigate();
   const userData = useSelector((state) => state.auth.userData);
@@ -39,7 +46,7 @@ function PostForm({ post }) {
       const file = await Service.uploadFile(data.image[0]);
       if (file) {
         const fileId = file.$id; // takes the fileid from image uploaded in the bucket 
-        data.featuredImage = fileId; // assigning the fileid to featured image
+        data.featuredImage = fileId; // assigning the fileid to featured image also creating or appending featuredImage in data object
         const dbPost = await Service.createPost(
           {...data,
           userId: userData.$id // takes the id from the user logged in as whenever someone create a new account a new id is generated
@@ -106,8 +113,16 @@ function PostForm({ post }) {
           type="file"
           className="mb-4"
           accept="image/png, image/jpg, image/jpeg, image/gif"
-          {...register("image", { required: true })}
+          {...register("image", {
+            required: {
+              value: true,
+              message: "Please upload the image ⚠️",
+            },
+          })}
         />
+        {errors.image &&(
+          <p className="text-red-500 text-sm">{errors.image.message}</p>
+        )}
 
         {post && (
           <div className="w-full mb-4">

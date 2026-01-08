@@ -61,10 +61,21 @@ export default function Post() {
             )}
           </div>
           <div className="w-full mb-6">
-            <h1 className="text-2xl font-bold">{post.title}</h1>
+            <h1 className="text-2xl font-bold text-white">{post.title}</h1>
           </div>
-          <div className="browser-css ">{parse(post.content)}</div>
+          <div className=" text-white text-left">
+            {parse(post.content)}
+          </div>
         </Container>
       </div>
-    ) : null;
+    ) : (
+      <div className="w-full py-20 min-h-screen flex justify-center items-center">
+        <div className="text-center -mt-40">
+          <div className="animate-spin border-b-2 w-20 h-20 rounded-full mb-6 border-amber-50"></div>
+          <h1 className=" animate-pulse text-xl font-semibold text-gray-600 ">
+            Loading
+          </h1>
+        </div>
+      </div>
+    );
 }

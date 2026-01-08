@@ -4,4 +4,10 @@
  
   text-align: center;
 }
+@theme{
+  --color-gray-500:oklch(20.5% 0 0);
+  --color-slate-800:oklch(26.8% 0.007 34.298);
+  --color-head-100:oklch(21% 0.006 285.885)
+  
+}
 
