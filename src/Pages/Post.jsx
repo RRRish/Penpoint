@@ -9,8 +9,8 @@ export default function Post() {
     const [post, setPost] = useState(null);
     const { slug } = useParams();
     const navigate = useNavigate();
+
     const userData = useSelector((state) => state.auth.userData);
-  
     
     
     const isAuthor = post && userData ? post.userId === userData.$id : false;
@@ -46,7 +46,7 @@ export default function Post() {
               alt={post.title}
               className="rounded-xl w-50"
             />
-
+            
             {isAuthor && (
               <div className="absolute right-6 top-6">
                 <Link to={`/edit-post/${post.$id}`}>
@@ -63,16 +63,16 @@ export default function Post() {
           <div className="w-full mb-6">
             <h1 className="text-2xl font-bold text-white">{post.title}</h1>
           </div>
-          <div className=" text-white text-left">
-            {parse(post.content)}
-          </div>
+          <div className="browser-css text-white text-left ">
+                              {parse(post.content)}
+                              </div>
         </Container>
       </div>
     ) : (
       <div className="w-full py-20 min-h-screen flex justify-center items-center">
         <div className="text-center -mt-40">
           <div className="animate-spin border-b-2 w-20 h-20 rounded-full mb-6 border-amber-50"></div>
-          <h1 className=" animate-pulse text-xl font-semibold text-gray-600 ">
+          <h1 className=" animate-pulse text-xl font-semibold text-zinc-500   ">
             Loading
           </h1>
         </div>

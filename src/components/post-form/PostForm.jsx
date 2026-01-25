@@ -51,8 +51,18 @@ function PostForm({ post }) {
           {...data,
           userId: userData.$id // takes the id from the user logged in as whenever someone create a new account a new id is generated
         });
+        // console.log(`UserId:- ${userData.$id}`);
+        
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
+        }
+        else{
+           return(
+            <div>
+               <div className=" border-b-2 rounded-full animate-spin border-amber-100">
+               </div>
+            </div>
+           );
         }
       }
     }
@@ -81,7 +91,7 @@ function PostForm({ post }) {
     };
   }, [watch, slugTransForm, setValue]);
   return (
-    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap">
+    <form onSubmit={handleSubmit(submit)} className="flex flex-wrap text-white">
       <div className="w-2/3 px-2">
         <Input
           label="Title :"
@@ -92,7 +102,7 @@ function PostForm({ post }) {
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          className="mb-4 "
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransForm(e.currentTarget.value), {
@@ -143,7 +153,7 @@ function PostForm({ post }) {
         <Button
           type="submit"
           bgColor={post ? "bg-green-500" : undefined}
-          className="w-full"
+          className="w-full cursor-pointer"
         >
           {post ? "update" : "Submit"}
         </Button>
